@@ -2,12 +2,12 @@
 
 namespace App\Imports;
 
+use App\Models\Locality;
 use App\Models\Municipality;
 use App\Models\Settlement;
 use App\Models\Settlementtype;
 use App\Models\Settlementzipcode;
 use App\Models\Zipcode;
-use App\Models\State;
 use App\Models\Zone;
 use Maatwebsite\Excel\Concerns\OnEachRow;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -34,7 +34,7 @@ class ZipcodesImport implements OnEachRow, WithHeadingRow, WithUpserts
         if (array_key_exists('d_codigo', $row)) {
 
             $municipality = Municipality::where('name', $row['d_mnpio'])->where('key', '=', $row['c_mnpio'])->first()->id ?? null;
-            $locality = State::where('name', '=', $row['d_ciudad'])->first()->id ?? null;
+            $locality = Locality::where('name', '=', $row['d_ciudad'])->first()->id ?? null;
             $zone = Zone::where('name', '=', $row['d_zona'])->first()->id ?? null;
             $settlement = Settlement::where('name', '=', $row['d_asenta'])->first()->id ?? null;
             $settlementtype = Settlementtype::where('name', '=', $row['d_tipo_asenta'])->first()->id ?? null;
@@ -43,8 +43,8 @@ class ZipcodesImport implements OnEachRow, WithHeadingRow, WithUpserts
             if (!$zipcode) {
                 $zipcode = Zipcode::create([
                     'zipcode' => $row['d_codigo'],
-                    'locality_id' => $locality,
                     'municipality_id' => $municipality,
+                    'locality_id' => $locality,
                     'zone_id' => $zone,
                     'state_id' => $row['c_estado'],
                 ]);
@@ -53,6 +53,7 @@ class ZipcodesImport implements OnEachRow, WithHeadingRow, WithUpserts
             Settlementzipcode::create([
                 'zipcode_id' => $zipcode->id,
                 'settlement_id' => $settlement,
+
                 'municipality_id' => $municipality,
                 'settlementtype_id' => $settlementtype,
                 'zone_id' => $zone,

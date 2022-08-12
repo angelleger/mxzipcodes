@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('zipcodes', function (Blueprint $table) {
             $table->id();
             $table->integer('zipcode')->unique();
-            $table->unsignedBigInteger('locality_id')->nullable();
-            $table->foreign('locality_id')->references('id')->on('municipalities');
             $table->unsignedBigInteger('municipality_id')->nullable();
+            $table->unsignedBigInteger('locality_id')->nullable();
+            $table->foreign('locality_id')->references('id')->on('localities');
             $table->foreign('municipality_id')->references('id')->on('municipalities');
             $table->unsignedBigInteger('state_id')->nullable();
             $table->foreign('state_id')->references('id')->on('states');

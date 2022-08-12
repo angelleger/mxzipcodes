@@ -20,7 +20,7 @@ class Zipcode extends Model
      *
      * @var array
      */
-    protected $fillable = ['zipcode', 'municipality_id', 'state_id', 'zone_id', 'locality_id'];
+    protected $fillable = ['zipcode', 'locality_id', 'municipality_id', 'state_id', 'zone_id'];
 
     public function __construct()
     {
@@ -43,7 +43,7 @@ class Zipcode extends Model
      */
     public function locality()
     {
-        return $this->belongsTo(State::class, 'locality_id', 'id');
+        return $this->belongsTo(Locality::class, 'locality_id', 'id');
     }
 
     /**
@@ -71,7 +71,7 @@ class Zipcode extends Model
 
     }
 
-    public function settlementstest($zipcode_id, $municipality_id, $zone_id)
+    public function settlementsRelationship($zipcode_id, $municipality_id, $zone_id)
     {
 
         $relationship = Settlementzipcode::where('zipcode_id', '=', $zipcode_id)

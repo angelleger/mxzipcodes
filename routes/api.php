@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/zipcode/{zipcode}', [ZipcodeController::class, 'index']);
+
+Route::get('/cache', [ZipcodeController::class, 'cache']);
+
