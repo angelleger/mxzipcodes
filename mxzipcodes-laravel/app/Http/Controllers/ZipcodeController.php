@@ -26,12 +26,12 @@ class ZipcodeController extends Controller
     public function import()
     {
 
-        // Excel::import(new ZoneImport, request()->file('file'));
-        // Excel::import(new MunicipalityImport, request()->file('file'));
-        // Excel::import(new SettlementtypesImport, request()->file('file'));
-        // Excel::import(new CitiesImport, request()->file('file'));
-        // Excel::import(new StatesImport, request()->file('file'));
-        // Excel::import(new SettlementsImport, request()->file('file'));
+        Excel::import(new ZoneImport, request()->file('file'));
+        Excel::import(new MunicipalityImport, request()->file('file'));
+        Excel::import(new SettlementtypesImport, request()->file('file'));
+        Excel::import(new CitiesImport, request()->file('file'));
+        Excel::import(new StatesImport, request()->file('file'));
+        Excel::import(new SettlementsImport, request()->file('file'));
         Excel::import(new ZipcodesImport, request()->file('file'));
 
         return back();
