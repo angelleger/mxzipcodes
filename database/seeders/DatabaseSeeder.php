@@ -20,6 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(MunicipalitiesTableSeeder::class);
         $this->call(StatesTableSeeder::class);
         $this->call(ZonesTableSeeder::class);
-        $this->call(SettlementZipcodeTableSeeder::class);
+      //  $this->call(SettlementZipcodeTableSeeder::class);
     }
 }
