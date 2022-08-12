@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ZonesTableSeeder::class);
       //  $this->call(ZipcodesTableSeeder::class);
        // $this->call(SettlementZipcodeTableSeeder::class);
+        $this->call(LocalitiesTableSeeder::class);
     }
 }
