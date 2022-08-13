@@ -105,16 +105,16 @@ class ZipcodeController extends Controller
 
         }
 
-        return response()->json(['status' => 'success', 'message' => 'CACHED']);
+        return response()->json(['status' => 'success cached', 'message' => $response]);
 
     }
 
     public function uncache()
     {
 
-        $cachedZipcode = Redis::del(Redis::keys('*'));
+        $uncached = Redis::del(Redis::keys('*'));
 
-        return response()->json(['status' => 'success', 'message' => $response]);
+        return response()->json(['status' => 'success', 'message' => "uncached"]);
 
     }
 
