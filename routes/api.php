@@ -19,3 +19,6 @@ Route::get('/zipcode/{zipcode}', [ZipcodeController::class, 'index']);
 
 Route::get('/cache', [ZipcodeController::class, 'cache']);
 
+Route::get('/uncache', [ZipcodeController::class, 'uncache']);
+
+

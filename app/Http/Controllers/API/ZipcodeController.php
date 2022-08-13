@@ -64,16 +64,15 @@ class ZipcodeController extends Controller
         $datas = Zipcode::all();
 
 
-        foreach ($datas as $data){
+        $response = [];
 
+        foreach ($datas as $data) {
 
             $cachedZipcode = Redis::get('zipcode_' . $data->zipcode);
 
             if (isset($cachedZipcode)) {
 
-                echo "$data->zipcode - CACHED ALREADY";
-                echo "\n";
-
+                $response[$data->zipcode] = "CACHED ALREADY";
 
             } else {
 
@@ -99,14 +98,24 @@ class ZipcodeController extends Controller
 
                 Redis::set('zipcode_' . $data->zipcode, json_encode($zipcode_response));
 
-               echo "$data->zipcode - CACHED";
-               echo "\n";
+                $response[$data->zipcode] = "CACHED NOW";
 
 
             }
 
-
         }
+
+        return response()->json(['status' => 'success', 'message' => 'CACHED']);
+
+    }
+
+    public function uncache()
+    {
+
+        $cachedZipcode = Redis::del(Redis::keys('*'));
+
+        return response()->json(['status' => 'success', 'message' => $response]);
+
     }
 
 }
