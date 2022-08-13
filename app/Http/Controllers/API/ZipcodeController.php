@@ -7,6 +7,7 @@ use App\Models\State;
 use App\Models\Zipcode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Artisan;
 
 class ZipcodeController extends Controller
 {
