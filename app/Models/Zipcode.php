@@ -76,7 +76,6 @@ class Zipcode extends Model
 
         $relationship = Settlementzipcode::where('zipcode_id', '=', $zipcode_id)
             ->where('municipality_id', '=', $municipality_id)
-            ->where('zone_id', '=', $zone_id)
             ->orderBy('key', 'asc')
             ->get();
 
@@ -99,15 +98,15 @@ class Zipcode extends Model
         }
 
         // this will help to make the exact order of the API we are replicating from
-        foreach ($settlements as $key => $value) {
-            if ($settlements[$key]['key'] < 1000) {
-                $new_value = $settlements[$key];
-                unset($settlements[$key]);
-                $settlements[] = $new_value;
-            }
-        }
+        // foreach ($settlements as $key => $value) {
+        //     if ($settlements[$key]['key'] < 1000) {
+        //         $new_value = $settlements[$key];
+        //         unset($settlements[$key]);
+        //         $settlements[] = $new_value;
+        //     }
+        // }
 
-        $settlements = array_values($settlements);
+        // $settlements = array_values($settlements);
 
         return $settlements;
 

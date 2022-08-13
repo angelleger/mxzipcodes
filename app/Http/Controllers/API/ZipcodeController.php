@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\State;
 use App\Models\Zipcode;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redis;
 
 class ZipcodeController extends Controller
 {
@@ -65,7 +65,6 @@ class ZipcodeController extends Controller
     {
         $datas = Zipcode::all();
 
-
         $response = [];
 
         foreach ($datas as $data) {
@@ -102,7 +101,6 @@ class ZipcodeController extends Controller
 
                 $response[$data->zipcode] = "CACHED NOW";
 
-
             }
 
         }
@@ -130,19 +128,30 @@ class ZipcodeController extends Controller
 
     }
 
-    public function testapi(){
+    public function testapi()
+    {
 
         $zipcodes = Zipcode::inRandomOrder()
-                ->limit(1)
+                ->limit(10)
                 ->get();
+        // $zipcodes = Zipcode::
+        //     where('zipcode', '=', 78117)
+        //     ->get();
 
         $result = [];
 
-        foreach ($zipcodes as $zipcode){
+        foreach ($zipcodes as $zipcode) {
             $zipcode->zipcode = str_pad($zipcode->zipcode, 5, '0', STR_PAD_LEFT);
-            $remote = Http::get('https: //jobs.backbonesystems.io/api/zip-codes/' . $zipcode->zipcode);
+            $remote = Http::get('https://jobs.backbonesystems.io/api/zip-codes/' . $zipcode->zipcode);
+            $local = Http::get('http://159.223.116.118/api/zipcode/' . $zipcode->zipcode);
+            $result[$zipcode->zipcode] = [
+                'equal' => $local->json() == $remote->json(),
+                'local' => $local->json(),
+                'remote' => $remote->json(),
+            ];
         }
-        return response()->json(['status' => 'success', 'remote' => $remote]);
+
+        return response()->json($result);
 
     }
 
