@@ -118,7 +118,11 @@ class ZipcodeController extends Controller
         Artisan::call('route:clear');
         Artisan::call('view:clear');
 
-        $uncached = Redis::del(Redis::keys('*'));
+        $caches = Redis::keys('*');
+
+        foreach ($caches as $key) {
+            Redis::del($key);
+        }
 
         return response()->json(['status' => 'success', 'message' => "uncached", 'redis_keys' => Redis::keys('*')]);
 
