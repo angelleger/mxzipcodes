@@ -146,8 +146,6 @@ class ZipcodeController extends Controller
             $local = Http::get('http://159.223.116.118/api/zipcode/' . $zipcode->zipcode);
             $result[$zipcode->zipcode] = [
                 'equal' => $local->json() == $remote->json(),
-                'local' => $local->json(),
-                'remote' => $remote->json(),
             ];
         }
 
