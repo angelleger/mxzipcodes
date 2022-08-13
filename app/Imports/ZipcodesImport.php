@@ -53,7 +53,6 @@ class ZipcodesImport implements OnEachRow, WithHeadingRow, WithUpserts
             Settlementzipcode::create([
                 'zipcode_id' => $zipcode->id,
                 'settlement_id' => $settlement,
-
                 'municipality_id' => $municipality,
                 'settlementtype_id' => $settlementtype,
                 'zone_id' => $zone,

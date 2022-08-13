@@ -14,14 +14,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(LocalitiesTableSeeder::class);
+        $this->call(CitiesTableSeeder::class);
         $this->call(SettlementsTableSeeder::class);
         $this->call(SettlementtypesTableSeeder::class);
-        $this->call(CitiesTableSeeder::class);
         $this->call(MunicipalitiesTableSeeder::class);
         $this->call(StatesTableSeeder::class);
         $this->call(ZonesTableSeeder::class);
         $this->call(ZipcodesTableSeeder::class);
         $this->call(SettlementZipcodeTableSeeder::class);
-        $this->call(LocalitiesTableSeeder::class);
     }
 }
