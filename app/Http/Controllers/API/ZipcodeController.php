@@ -114,7 +114,7 @@ class ZipcodeController extends Controller
 
         $uncached = Redis::del(Redis::keys('*'));
 
-        return response()->json(['status' => 'success', 'message' => "uncached"]);
+        return response()->json(['status' => 'success', 'message' => "uncached", 'redis_keys' => Redis::keys('*')]);
 
     }
 
