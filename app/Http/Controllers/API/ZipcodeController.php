@@ -8,6 +8,7 @@ use App\Models\Zipcode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Http;
 
 class ZipcodeController extends Controller
 {
@@ -38,10 +39,10 @@ class ZipcodeController extends Controller
             $zipcode_response = [
 
                 'zip_code' => "$data->zipcode",
-                'locality' => mb_strtoupper($data->locality->name ?? ""),
+                'locality' => remove_accents(mb_strtoupper($data->locality->name ?? "")),
                 'federal_entity' => [
                     'key' => $data->state->id,
-                    'name' => mb_strtoupper($data->state->name),
+                    'name' => remove_accents(mb_strtoupper($data->state->name)),
                     'code' => $data->state->code,
                 ],
                 'settlements' =>
@@ -49,7 +50,7 @@ class ZipcodeController extends Controller
                 ,
                 'municipality' => [
                     'key' => $data->municipality->key,
-                    'name' => mb_strtoupper($data->municipality->name),
+                    'name' => remove_accents(mb_strtoupper($data->municipality->name)),
                 ],
             ];
 
@@ -126,6 +127,22 @@ class ZipcodeController extends Controller
         }
 
         return response()->json(['status' => 'success', 'message' => "uncached", 'redis_keys' => Redis::keys('*')]);
+
+    }
+
+    public function testapi(){
+
+        $zipcodes = Zipcode::inRandomOrder()
+                ->limit(1)
+                ->get();
+
+        $result = [];
+
+        foreach ($zipcodes as $zipcode){
+            $zipcode->zipcode = str_pad($zipcode->zipcode, 5, '0', STR_PAD_LEFT);
+            $remote = Http::get('https: //jobs.backbonesystems.io/api/zip-codes/' . $zipcode->zipcode);
+        }
+        return response()->json(['status' => 'success', 'remote' => $remote]);
 
     }
 

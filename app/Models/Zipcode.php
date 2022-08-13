@@ -84,7 +84,7 @@ class Zipcode extends Model
 
         foreach ($relationship as $rel) {
 
-            $settlement_name = mb_strtoupper($this->settlement->getByID($rel->settlement_id)->name);
+            $settlement_name = remove_accents(mb_strtoupper($this->settlement->getByID($rel->settlement_id)->name));
             $zone_name = mb_strtoupper($this->zone->getByID($rel->zone_id)->name);
             $settlementtype_name = ucfirst($this->settlementtype->getByID($rel->settlementtype_id)->name);
 
