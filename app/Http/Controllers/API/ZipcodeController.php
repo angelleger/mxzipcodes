@@ -121,6 +121,7 @@ class ZipcodeController extends Controller
         $caches = Redis::keys('*');
 
         foreach ($caches as $key) {
+            $key = str_replace('laravel_database_', '', $key);
             Redis::del($key);
         }
 
