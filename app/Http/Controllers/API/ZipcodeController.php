@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\State;
 use App\Models\Zipcode;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redis;
@@ -17,23 +16,27 @@ class ZipcodeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $zipcode)
+    public function index($zipcode)
     {
         $data = Zipcode::where('zipcode', $zipcode)->first();
 
-        // check if zipcode exist
+        // Check if zipcode exist
         if (!$data) {
+            // if not, return a 404 error
             return abort(404);
         }
 
         $cachedZipcode = Redis::get('zipcode_' . $zipcode);
 
+        // Check if request is already cached
         if (isset($cachedZipcode)) {
 
+            // Return cached response for this zipcode
             $zipcode_response = json_decode($cachedZipcode, false);
 
         } else {
 
+            // Format zipcode with 5 digits pattern
             $data->zipcode = str_pad($data->zipcode, 5, '0', STR_PAD_LEFT);
 
             $zipcode_response = [
@@ -54,6 +57,7 @@ class ZipcodeController extends Controller
                 ],
             ];
 
+            // Let's cache this response
             Redis::set('zipcode_' . $zipcode, json_encode($zipcode_response));
 
         }
