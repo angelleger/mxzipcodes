@@ -138,16 +138,13 @@ class ZipcodeController extends Controller
         $zipcodes = Zipcode::inRandomOrder()
                 ->limit(10)
                 ->get();
-        // $zipcodes = Zipcode::
-        //     where('zipcode', '=', 78117)
-        //     ->get();
 
         $result = [];
 
         foreach ($zipcodes as $zipcode) {
             $zipcode->zipcode = str_pad($zipcode->zipcode, 5, '0', STR_PAD_LEFT);
             $remote = Http::get('https://jobs.backbonesystems.io/api/zip-codes/' . $zipcode->zipcode);
-            $local = Http::get('http://159.223.116.118/api/zipcode/' . $zipcode->zipcode);
+            $local = Http::get('http://159.223.116.118/api/zip-codes/' . $zipcode->zipcode);
             $result[$zipcode->zipcode] = [
                 'equal' => $local->json() == $remote->json(),
             ];
