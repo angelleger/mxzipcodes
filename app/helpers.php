@@ -34,8 +34,8 @@ if (!function_exists('remove_accents')) {
             . " Ꝙ ꝙ Ꝛ ꝛ Ꝟ ꝟ Ａ Ｂ Ｃ Ｄ Ｅ Ｆ Ｇ Ｈ Ｉ Ｊ Ｋ Ｌ Ｍ Ｎ Ｏ Ｐ Ｑ Ｒ Ｓ Ｔ Ｕ Ｖ Ｗ Ｘ"
             . " Ｙ Ｚ ａ ｂ ｃ ｄ ｅ ｆ ｇ ｈ ｉ ｊ ｋ ｌ ｍ ｎ ｏ ｐ ｑ ｒ ｓ ｔ ｕ ｖ ｗ ｘ ｙ ｚ");
         $to = explode(" ", ""
-            . " A A A A A A C E E E E I I I I N O O O O O O U U U U Y a a a"
-            . " a a a c e e e e i i i i n o o o o o o u u u u y y A a A a A"
+            . " A A A A A A C E E E E I I I I ? O O O O O O U U U ? Y a a a"
+            . " a a a c e e e e i i i i ? o o o o o o u u u ? y y A a A a A"
             . " a C c C c C c C c D d D d E e E e E e E e E e G g G g G g G"
             . " g H h H h I i I i I i I i I i J j K k L l L l L l L l L l N"
             . " n N n N n n O o O o O o R r R r R r S s S s S s S s T t T t"
