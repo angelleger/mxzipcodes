@@ -8,7 +8,7 @@
   - [GET /api/zip-codes/{zipcode}](#get-apizip-codeszipcode)
   - [GET /api/{name}](#get-apiname)
   - [GET /api/test](#get-apitest)
-  - [Problemas con backbonesystems API](#problemas-con-backbonesystems-api)
+- [Problemas con backbonesystems API](#problemas-con-backbonesystems-api)
 ## Acerca de MXZIPCODES
 
 **MXZIPCODES** es un **REST API** construido en **Laravel**, el cual importa desde un [Excel](https://www.correosdemexico.gob.mx/SSLServicios/ConsultaCP/CodigoPostal_Exportar.aspx) todos los datos para popular la Base de Datos y poder generar los endpoints necesarios.
@@ -186,7 +186,7 @@ https://jobs.backbonesystems.io/api/zip-codes/
 ```
 ___
 
-### Problemas con backbonesystems API
+## Problemas con backbonesystems API
 Probando los endpoints note que algunos muestran diferencias, tomemos de ejemplo este en especifico el `29904`
 ![Test API](public/images/1.test-api.png)
 
