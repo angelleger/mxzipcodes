@@ -147,14 +147,36 @@ Este enpoint esta destinado a hacer una prueba de comparación entre este API y 
 
 ```
 {
-    "success": true
-}
-
-or any implemented error from https://buffer.com/developers/api/errors
-
-{
-    "code": 1000,
-    "error": "An error message"
+   "30674":{
+      "equal":true
+   },
+   "36310":{
+      "equal":true
+   },
+   "47368":{
+      "equal":true
+   },
+   "50945":{
+      "equal":true
+   },
+   "58067":{
+      "equal":true
+   },
+   "60556":{
+      "equal":true
+   },
+   "61367":{
+      "equal":true
+   },
+   "64120":{
+      "equal":true
+   },
+   "68103":{
+      "equal":true
+   },
+   "87949":{
+      "equal":true
+   }
 }
 ```
 ___
