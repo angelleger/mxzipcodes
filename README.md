@@ -8,6 +8,7 @@
   - [GET /api/zip-codes/{zipcode}](#get-apizip-codeszipcode)
   - [GET /api/{name}](#get-apiname)
   - [GET /api/test](#get-apitest)
+  - [Problemas con backbonesystems API](#problemas-con-backbonesystems-api)
 ## Acerca de MXZIPCODES
 
 **MXZIPCODES** es un **REST API** construido en **Laravel**, el cual importa desde un [Excel](https://www.correosdemexico.gob.mx/SSLServicios/ConsultaCP/CodigoPostal_Exportar.aspx) todos los datos para popular la Base de Datos y poder generar los endpoints necesarios.
@@ -141,7 +142,11 @@ Con este endpoint aceleramos la velocidad de respuesta de todos y cada unos de l
 ```
 ___
 ### GET /api/test
-Este enpoint esta destinado a hacer una prueba de comparación entre este API y otro similar.
+Este enpoint esta destinado a hacer una con 10 endpoints tomados de manera aleatoria a estos dos endpoints.
+
+http://159.223.116.118/api/zip-codes/
+
+https://jobs.backbonesystems.io/api/zip-codes/
 
 **Response**
 
@@ -181,3 +186,24 @@ Este enpoint esta destinado a hacer una prueba de comparación entre este API y 
 ```
 ___
 
+### Problemas con backbonesystems API
+Probando los endpoints note que algunos muestran diferencias, tomemos de ejemplo este en especifico el `29904`
+![Test API](public/images/1.test-api.png)
+
+al ver las diferencias note que el de backbonesystems tenia **75** items en settlements:
+
+![Test API](public/images/3.test-api.png)
+
+pero el de MXZIPCODES tiene **76**:
+
+![Test API](public/images/2.test-api.png)
+
+al consultar el excel como pueden ver el numero correcto es **76**:
+
+![Test API](public/images/4.test-api.png)
+
+asi que el API Rest de backbonesystems al parecer en varios zipcodes le faltan settlements por ende muchas veces no seran iguales en las comparaciones.
+
+Otro problema es por ejemplo el zipcode `99640` da un 404, cuando en realidad si existe en el documento. 
+
+https://jobs.backbonesystems.io/api/zip-codes/99640
